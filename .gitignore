@@ -1,0 +1,11 @@
+.*.swp
+*~
+*.bak
+*.orig
+*.wip
+
+.terraform*
+
+terraform.tfstate*
+terraform.tfvars
+

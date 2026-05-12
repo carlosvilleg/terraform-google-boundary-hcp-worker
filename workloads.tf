@@ -3,7 +3,7 @@ resource "google_compute_instance" "worload1" {
   name         = "workload1"
   machine_type = "e2-micro"
   zone         = "us-central1-a"
-  project = google_project.workload1.project_id
+  project = google_project.workloads1.project_id
 
   tags = ["foo", "bar"]
 
@@ -14,11 +14,6 @@ resource "google_compute_instance" "worload1" {
         my_label = "value"
       }
     }
-  }
-
-  // Local SSD disk
-  scratch_disk {
-    interface = "NVME"
   }
 
   network_interface {
@@ -35,18 +30,22 @@ resource "google_compute_instance" "worload1" {
 
   metadata_startup_script = "echo hi > /test.txt"
 
+/*
   service_account {
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
     email  = google_service_account.boundary_service_account.email
     scopes = ["cloud-platform"]
   }
+*/
+
+  depends_on = [ google_project_service.workloads1 ]
 }
 
 resource "google_compute_instance" "worload2" {
   name         = "workload2"
   machine_type = "e2-micro"
   zone         = "us-central1-a"
-  project = google_project.workload2.project_id
+  project = google_project.workloads2.project_id
 
   tags = ["foo", "bar"]
 
@@ -57,11 +56,6 @@ resource "google_compute_instance" "worload2" {
         my_label = "value"
       }
     }
-  }
-
-  // Local SSD disk
-  scratch_disk {
-    interface = "NVME"
   }
 
   network_interface {
@@ -78,9 +72,13 @@ resource "google_compute_instance" "worload2" {
 
   metadata_startup_script = "echo hi > /test.txt"
 
+/*
   service_account {
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
     email  = google_service_account.boundary_service_account.email
     scopes = ["cloud-platform"]
   }
+*/
+
+  depends_on = [ google_project_service.workloads2 ]
 }

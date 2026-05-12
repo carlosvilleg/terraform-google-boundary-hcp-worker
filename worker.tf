@@ -16,11 +16,6 @@ resource "google_compute_instance" "worker1" {
     }
   }
 
-  // Local SSD disk
-  scratch_disk {
-    interface = "NVME"
-  }
-
   network_interface {
     network = "default"
 
@@ -40,4 +35,6 @@ resource "google_compute_instance" "worker1" {
     email  = google_service_account.boundary_service_account.email
     scopes = ["cloud-platform"]
   }
+
+  depends_on = [ google_project_service.admin ]
 }

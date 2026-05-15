@@ -15,6 +15,7 @@ data "google_billing_account" "acct" {
 resource "google_folder" "top" {
   display_name = "Top"
   parent       = data.google_organization.org.name
+  deletion_protection = false
 }
 
 resource "google_project" "admin" {
@@ -22,6 +23,7 @@ resource "google_project" "admin" {
   project_id = "boundary-worker"
   org_id  = data.google_organization.org.org_id
   billing_account = data.google_billing_account.acct.id
+  deletion_policy = "DELETE"
 }
 
 /*
@@ -29,6 +31,7 @@ resource "google_project" "boundary-worker" {
   name       = "Boundary Worker"
   project_id = "boundary-worker"
   folder_id  = google_folder.top.name
+  deletion_policy = "DELETE"
 }
 */
 
@@ -38,6 +41,7 @@ resource "google_project" "workloads1" {
   project_id = "river-treat-495713-e3"
   folder_id  = google_folder.top.name
   billing_account = data.google_billing_account.acct.id
+  deletion_policy = "DELETE"
 }
 
 resource "google_project" "workloads2" {
@@ -46,6 +50,7 @@ resource "google_project" "workloads2" {
   project_id = "regal-cursor-495713-t8"
   folder_id  = google_folder.top.name
   billing_account = data.google_billing_account.acct.id
+  deletion_policy = "DELETE"
 }
 
 resource "google_project_service" "project" {

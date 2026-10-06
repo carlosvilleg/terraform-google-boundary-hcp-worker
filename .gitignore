@@ -1,0 +1,12 @@
+
+.*.swp
+*~
+
+*.env
+env
+
+.terraform*
+
+terraform.tfstate*
+terraform.tfvars
+

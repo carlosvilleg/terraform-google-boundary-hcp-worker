@@ -1,0 +1,13 @@
+name: Template Sync
+on:
+  schedule:
+    - cron: "0 0 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    uses: hashicorp/hvd-module-gha/.github/workflows/template-sync.yml@main

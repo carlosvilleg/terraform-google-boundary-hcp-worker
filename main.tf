@@ -47,7 +47,7 @@ module "boundary-enterprise-worker-hvd" {
 
   #worker_is_internal = true
   worker_is_internal = false
-  worker_tags = {cloud = "gcp", type = "egress", environment = "sandbox"}
+  worker_tags = {cloud = "gcp", region = var.region, type = "egress", environment = "sandbox"}
 
   }
 
